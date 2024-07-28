@@ -7,10 +7,16 @@
 
 <h3>AddMember</h3>
 
-<EditForm Model="@member" OnSubmit="SaveMember">
+@* <EditForm Model="@member" OnSubmit="SaveMember"> *@   @* OnSubmit metyhod will be check valid form, in case when is not valid, adding procedure will be excecuted *@
+<EditForm Model="@member" OnValidSubmit="SaveMember">   @*in this case adding object will be executed only when form is valid*@
+    <DataAnnotationsValidator></DataAnnotationsValidator>
 
+    <ValidationMessage For="@(() => member.MemberName)"></ValidationMessage>
     <InputText class="form-control" placeholder="Name" @bind-Value="@member.MemberName"></InputText><br />
+
+    <ValidationMessage For="@(() => member.Email)"></ValidationMessage>
     <InputText class="form-control" placeholder="Email" @bind-Value="@member.Email"></InputText><br />
+
     <InputNumber class="form-control" placeholder="Age" @bind-Value="@member.Age"></InputNumber><br />
     <InputDate class="form-control" placeholder="Joining date" @bind-Value="member.JoiningDate"></InputDate><br />
 

@@ -11,9 +11,20 @@
 <button @onclick="DeleteAll" type="button" class="btn btn-danger">Delete All</button>
 
 
-@if(memberList.Count == 0 || memberList == null)
+@if (memberList.Count == 0 || memberList == null)
 {
-    <p>No members to display</p>
+    <style>
+        .centered-text {
+            text-align: center; /* Wyśrodkowanie tekstu */
+            font-size: 2em; /* Zwiększenie rozmiaru czcionki */
+            color: tomato; /* Zmiana koloru tekstu na pomarańczowy (Tomato) */
+            font-weight: bold; /* Opcjonalnie - pogrubienie tekstu */
+            padding: 20px; /* Opcjonalnie - dodanie paddingu */
+        }
+    </style>
+
+    <p class="centered-text">No members to display</p>
+
 }
 else
 {
