@@ -1,0 +1,52 @@
+﻿@page "/"
+@page "/Index"
+
+<h1>Contact list: </h1>
+<br />
+
+@using BlazorServerApp.Shared;
+
+<button type="button" @onclick="ShowModal" class="btn btn-danger">Delete all contacts</button>
+<button type="button" class="btn btn-success">Add new contact</button>
+<br />
+<br />
+
+<ContactList @ref="contactList" Contacts="contacts">
+    <NullContacts>
+        <div class="alert alert-info" role="alert">
+            @* <span>Contacts are loading... (from Index Razor)</span> *@
+            <div class="d-flex align-items-center">
+                <strong role="status">Contacts are loading... (from Index Razor)</strong>
+                <div class="spinner-border ms-auto" aria-hidden="true"></div>
+            </div>
+        </div>
+    </NullContacts>
+
+    <EmptyContacts>
+        <div class="alert alert-warning" role="alert">
+            <span>No contacts to display! (from Index Razor)</span>
+        </div>
+    </EmptyContacts>
+
+</ContactList>
+
+<DeleteAllConfirmation @ref="deleteAllConfirmation" UserChoice="DeleteAllContacts"></DeleteAllConfirmation>
+<ModalAddContact></ModalAddContact>
+
+
+<br />
+
+<MyTextbox @attributes="@MyTextboxAttributes"></MyTextbox>
+
+<br />
+<br />
+<button @onclick="HideContacts">Show/Hide contacts</button>
+<br />
+<br />
+<a href="./testpage">Test Page Directive</a>
+<br />
+<br />
+<button @onclick=NavigateToTestPage>Navigate to Test Page</button>
+
+
+

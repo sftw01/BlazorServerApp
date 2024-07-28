@@ -1,0 +1,98 @@
+﻿@*below path is not used here because is included in _imports.razor file*@
+@* @using BlazorServerApp.Models *@
+@inject IJSRuntime js
+
+
+
+
+
+@if (DisplayContacts)
+{
+    @if (Contacts is null)
+    {
+        @NullContacts
+
+
+        @*     <br />
+    <span>Contacts are loading...</span>
+    <br /> *@
+
+        @*     <div class="alert alert-info" role="alert">
+        Contacts are loading...
+    </div> *@
+    }
+    else if (Contacts.Count == 0)
+    {
+        @EmptyContacts
+
+
+
+        @*     <br />
+    <span>No contacts to display...</span>
+    <br /> *@
+
+        @*     <div class="alert alert-warning" role="alert">
+        No contacts to display...
+    </div> *@
+    }
+    else
+    {
+        @* without binding data, pass a parameter *@
+        @* <input type="checkbox" @onchange="@( () => DisplayEmail = !DisplayEmail )" /><label>Display email</label> *@
+
+        @* binding data Display Email with checkbox state *@
+        <input type="checkbox" @bind="DisplayEmail" />
+
+        <label>Display email</label>
+
+        @foreach (var contact in Contacts)
+        {
+            @* using component ContactComponent01*@
+            @*     <ContactComponent01 FirstName="@contact.FirstName" LastName="@contact.LastName" Email="@contact.Email"></ContactComponent01> *@
+            <ContactComponent01 CurrentContact="contact" DisplayEmail="DisplayEmail" DeleteCurrentContact="RequestPermission"></ContactComponent01>
+
+        }
+        
+        @* <MyTextbox placeholder="Placeholder 01" type="text" disabled="disabled"></MyTextbox> *@
+        @* <MyTextbox @attributes="@MyTextboxAttributes"></MyTextbox> *@
+
+       
+        
+    }
+}
+
+<DeleteConfirmation @ref="deleteConfirmation" OnConfirmed="OnDeleteConfirmed"></DeleteConfirmation>
+
+
+@code {
+    private DeleteConfirmation deleteConfirmation;
+
+    [Parameter]
+    public RenderFragment NullContacts { get; set; }
+
+    [Parameter]
+    public RenderFragment EmptyContacts { get; set; }
+
+    [Parameter]
+    public List<Contact> Contacts { get; set; }
+    private bool DisplayEmail = false;
+    private bool DisplayContacts = true;
+
+    //method to delete contact
+    private async Task RequestPermission(Contact contact)
+    {
+        deleteConfirmation.BodyContent = $"Do you need delete {contact.FirstName} {contact.LastName} from list?";
+        deleteConfirmation.ContactToDelete = contact;
+        deleteConfirmation.Show();
+    }
+
+    private async Task OnDeleteConfirmed(Contact contact)
+    {
+        Contacts.Remove(contact);
+        deleteConfirmation.Hide();
+    }
+
+
+    public void ShowContact() => DisplayContacts = true;
+    public void HideContact() => DisplayContacts = false;
+}

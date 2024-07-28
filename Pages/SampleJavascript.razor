@@ -1,0 +1,35 @@
+﻿@page "/sample-javascript"
+@inject IJSRuntime jsRuntime
+
+
+<h3>SampleJavascript</h3>
+
+
+<button @onclick="ShowAlert">Alert</button><br /><br />
+<span>@confirmResult</span><br />
+<button @onclick="ShowConfirm">Display Confirm</button>
+
+
+
+
+@code {
+    private string confirmResult;
+
+    private void ShowAlert()
+    {
+        //js -> alert("some message"); 
+        jsRuntime.InvokeVoidAsync("alert", "Hello world");
+    }
+
+    private async Task ShowConfirm()
+    {
+        var result = await jsRuntime.InvokeAsync<bool>("confirm", "Do you need to proceed?");
+        confirmResult = result.ToString();
+    }
+
+    [JSInvokable]
+    public static Task<string> GetValueFromMethod()
+    {
+        return Task.FromResult<string>("Hello world!");
+    }
+}

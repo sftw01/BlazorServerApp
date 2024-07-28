@@ -1,0 +1,80 @@
+﻿@page "/TestXX"
+
+
+
+
+<h3>TestXX</h3>
+
+<h3>Czesc @userName.</h3>
+
+<h3>Czesc @GetUserName()...witam w mojej <b>aplikacji</b></h3>
+
+<p>Sum: @GetSum() </p>
+
+@* <button @onclick="ChangeName">Change name</button> *@
+<button @onclick="@( () => {userName = "Andrzej";})">Change name</button>
+
+
+@if (testNum == 1)
+{
+    <p>Num is 1</p>
+}
+else
+{
+    <p>Num is not 1</p>
+}
+
+
+@* @for(int i = 0; i < 10; i++)
+{
+    <p>Value of i: @i</p>
+} *@
+
+@foreach (var name in names)
+{
+    <p>@((MarkupString)name)</p>
+}
+
+
+
+@code {
+    private string userName = "John";
+    private int testNum = 10;
+    private List<String> names;
+
+    //when the page is created procedure below is invoked
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        names = new List<string>
+        {
+            "<b>Value of string 1</b>",
+            "Value of string 2",
+            "Value of string 3",
+            "<i>Value of string 4</i>",
+            "Value of string 5",
+            "Value of string 6",
+            "Value of string 7",
+            "Value of string 8",
+            "Value of string 9",
+            "Value of string 10",
+        };
+    }
+
+    //ny procedure
+    private string GetUserName()
+    {
+        return userName + " Thomas";
+    }
+
+    private void ChangeName()
+    {
+        userName = "Peter";
+    }
+
+    private int GetSum()
+    {
+        return 2 + 2;
+    }
+}

@@ -1,0 +1,41 @@
+﻿@* main difference betwen components and normal razor files is not need  routing like as @page "/"  *@
+
+
+<p>
+    <b>Name: </b><span>@CurrentContact.FirstName  @CurrentContact.LastName</span><br />
+    @if (DisplayEmail)
+    {
+        <b>Email: <i>@CurrentContact.Email</i></b> <br />
+    }
+
+    @if (displayInfo)
+    {
+        <span>The Email Address of @CurrentContact.FirstName @CurrentContact.LastName is @CurrentContact.Email</span>
+    }
+    <br />
+
+    <button @onclick="@( () => { displayInfo = !displayInfo; } )">Show more info</button>
+
+    <button @onclick="@( () => DeleteCurrentContact.InvokeAsync(CurrentContact) )">Delete</button>
+
+</p>
+
+@code {
+    [Parameter]
+    public Contact CurrentContact { get; set; }
+
+    // [Parameter]
+    // public string FirstName {get; set;}
+    // [Parameter]
+    // public string LastName { get; set; }
+    // [Parameter]
+    // public string Email { get; set; }
+
+    [Parameter]
+    public bool DisplayEmail { get; set; }
+
+    private bool displayInfo = false;
+
+    [Parameter]
+    public EventCallback<Contact> DeleteCurrentContact { get; set; }
+}

@@ -1,0 +1,46 @@
+﻿@using BlazorServerApp.Services;
+
+
+@page "/memberlist"
+@inject IMemberService memberService;
+
+<h3>MemberList</h3>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col"> Joining date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var member in memberList)
+        {
+            <tr>
+@*                 <th scope="row">@member.Id</th>
+                <td>@member.MemberName</td>
+                <td>@member.Email</td>
+                <td>@member.Age</td>
+                <td>@member.JoiningDate</td> *@
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+    private List<Member> memberList;
+
+
+    protected override void OnInitialized()
+    {
+        memberList = memberService.GetAll();
+        base.OnInitialized();
+    }
+}
