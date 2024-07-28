@@ -49,13 +49,14 @@ else
         base.OnInitialized();
     }
 
-    private void DeleteAll()
+    public void DeleteAll()
     {
         memberService.DeleteAll();
-        navigationManager.NavigateTo("./memberlist");
-        StateHasChanged();
+        navigationManager.NavigateTo("./memberlist", true);
+        //StateHasChanged();
+    }
 
-    private void AddMemberFoo()
+    public void AddMemberFoo()
     {
         navigationManager.NavigateTo("./add-member");
 

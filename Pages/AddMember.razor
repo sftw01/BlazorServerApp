@@ -8,12 +8,13 @@
 <h3>AddMember</h3>
 
 <EditForm Model="@member" OnSubmit="SaveMember">
+
     <InputText class="form-control" placeholder="Name" @bind-Value="@member.MemberName"></InputText><br />
     <InputText class="form-control" placeholder="Email" @bind-Value="@member.Email"></InputText><br />
     <InputNumber class="form-control" placeholder="Age" @bind-Value="@member.Age"></InputNumber><br />
     <InputDate class="form-control" placeholder="Joining date" @bind-Value="member.JoiningDate"></InputDate><br />
 
-    <button class="btn btn-primary" type="submit" @onclick="SaveMember">Save Member</button>
+    <button class="btn btn-primary" type="submit">Save Member</button>
 
 </EditForm>
 
@@ -25,6 +26,7 @@
         base.OnInitialized();
         member = new MemberViewModel();
         member.JoiningDate = DateTime.UtcNow;
+        //member.JoiningDate = DateTime.SpecifyKind(member.JoiningDate, DateTimeKind.Utc);
     }
 
 
