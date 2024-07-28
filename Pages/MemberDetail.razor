@@ -1,16 +1,10 @@
 ﻿
-<tr>
-    @Member.MemberName
-</tr>
-<tr>
-    @Member.Email
-</tr>
-<tr>
-    @Member.Age
-</tr>
-<tr>
-    @Member.JoiningDate.ToString("dd-MM-yyyy");
-</tr>
+                <th scope="row">@Member.Id</th>
+                <td>@Member.MemberName</td>
+                <td>@Member.Email</td>
+                <td>@Member.Age</td>
+                <td>@Member.JoiningDate</td>
+
 
 @code {
 

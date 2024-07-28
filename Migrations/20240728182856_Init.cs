@@ -17,7 +17,7 @@ namespace BlazorServerApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MemberName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Age = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     MemberCnt = table.Column<int>(type: "int", nullable: false),
                     JoiningDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

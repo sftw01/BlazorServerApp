@@ -40,9 +40,9 @@ namespace BlazorServerApp.Seeder
                         Member memberRandom = new Member
                         {
 
-                            Age = random.Next(20, 60).ToString(),
+                            Age = random.Next(20, 60),
                             Email = $"mail{x}@user.com",
-                            MemberName = "Username_" + x.ToString() + 1,
+                            MemberName = "Username_" + x.ToString(),
                             JoiningDate = DateTime.Now,
                             MemberCnt = x + 1
                         };

@@ -30,8 +30,8 @@ namespace BlazorServerApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Age")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

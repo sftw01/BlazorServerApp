@@ -82,5 +82,12 @@ namespace BlazorServerApp.Services
         //public void Update(int id, MemberViewModel dto)
         //{
         //}
+
+        //to wrap my method
+        public void AddMember(Member member)
+        {
+            Create(member);
+        }
+
     }
 }

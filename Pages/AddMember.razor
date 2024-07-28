@@ -1,0 +1,44 @@
+﻿@using BlazorServerApp.Models;
+@using BlazorServerApp.Services
+@inject IMemberService memberService;
+@inject NavigationManager navigationManager;
+
+@page "/add-member"
+
+<h3>AddMember</h3>
+
+<EditForm Model="@member" OnSubmit="SaveMember">
+    <InputText class="form-control" placeholder="Name" @bind-Value="@member.MemberName"></InputText><br />
+    <InputText class="form-control" placeholder="Email" @bind-Value="@member.Email"></InputText><br />
+    <InputNumber class="form-control" placeholder="Age" @bind-Value="@member.Age"></InputNumber><br />
+    <InputDate class="form-control" placeholder="Joining date" @bind-Value="member.JoiningDate"></InputDate><br />
+
+    <button class="btn btn-primary" type="submit" @onclick="SaveMember">Save Member</button>
+
+</EditForm>
+
+@code {
+    private MemberViewModel member;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        member = new MemberViewModel();
+        member.JoiningDate = DateTime.UtcNow;
+    }
+
+
+    private void SaveMember()
+    {
+        memberService.AddMember(new Member
+        {
+            MemberName = member.MemberName,
+            Email = member.Email,
+            Age = member.Age,
+            JoiningDate = member.JoiningDate
+        });
+
+        navigationManager.NavigateTo("./memberlist");
+
+    }
+}

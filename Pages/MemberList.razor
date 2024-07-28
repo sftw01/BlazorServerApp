@@ -1,37 +1,42 @@
-﻿@using BlazorServerApp.Services;
-
-
+﻿
 @page "/memberlist"
+
+@using BlazorServerApp.Services;
 @inject IMemberService memberService;
+@inject NavigationManager navigationManager;
 
 <h3>MemberList</h3>
 
+<button @onclick="AddMemberFoo" type="button" class="btn btn-success">Add Member</button>
+<button @onclick="DeleteAll" type="button" class="btn btn-danger">Delete All</button>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Age</th>
-            <th scope="col"> Joining date</th>
-        </tr>
-    </thead>
-    <tbody>
-
+@if(memberList.Count == 0 || memberList == null)
+{
+    <p>No members to display</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Age</th>
+                <th scope="col"> Joining date</th>
+            </tr>
+        </thead>
         @foreach (var member in memberList)
         {
             <tr>
-@*                 <th scope="row">@member.Id</th>
-                <td>@member.MemberName</td>
-                <td>@member.Email</td>
-                <td>@member.Age</td>
-                <td>@member.JoiningDate</td> *@
+                <MemberDetail Member="@member"></MemberDetail>
             </tr>
         }
-    </tbody>
-</table>
+    </table>
+}
+
+
 
 @code {
 
@@ -43,4 +48,17 @@
         memberList = memberService.GetAll();
         base.OnInitialized();
     }
+
+    private void DeleteAll()
+    {
+        memberService.DeleteAll();
+        navigationManager.NavigateTo("./memberlist");
+        StateHasChanged();
+
+    private void AddMemberFoo()
+    {
+        navigationManager.NavigateTo("./add-member");
+
+    }
+    
 }

@@ -17,5 +17,8 @@ namespace BlazorServerApp.Services
         //void Update(int id, MemberViewModel dto);
 
 
+        //to wrap
+        void AddMember(Member member);
+
     }
 }

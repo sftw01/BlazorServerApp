@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorServerApp.Migrations
 {
     [DbContext(typeof(MembersDbContext))]
-    [Migration("20240728171634_Init")]
+    [Migration("20240728182856_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,8 +32,8 @@ namespace BlazorServerApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Age")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
