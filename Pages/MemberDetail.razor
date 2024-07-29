@@ -1,4 +1,6 @@
-﻿@using BlazorServerApp.Services;    
+﻿@using BlazorServerApp.Shared;
+
+@using BlazorServerApp.Services;    
 @inject IMemberService memberService;
 
 
@@ -13,6 +15,7 @@
                 </td>
 
                 <ModalAddContact @ref="modalAddContact" member="_member"></ModalAddContact>
+       
 
 @code {
 
@@ -23,10 +26,11 @@
     public Member _member = new Member();
 
     [Parameter]
-    public EventCallback<int> DeleteMember { get; set; }
-
+    public EventCallback<int> DeleteMember { get; set; }   
+   
     private void Delete()
     {
+
         memberService.Delete(Member.Id);
         DeleteMember.InvokeAsync(Member.Id);
     }
