@@ -9,7 +9,7 @@ namespace BlazorServerApp.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(10, ErrorMessage ="Nazwa uzytkownika nie moze byc dłuższa niż 10 znaków")]
+        [MaxLength(10, ErrorMessage ="Nazwa uzytkownika nie moze byc dłuższa niż 12 znaków")]
         [MinLength(3, ErrorMessage ="Nazwa uzytkownika musi zawierać przynajmniej 3 znaki")]
         public string MemberName { get; set; }
 

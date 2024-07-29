@@ -50,6 +50,8 @@ else
             </tr>
         }
     </table>
+
+ 
 }
 
 
@@ -80,11 +82,12 @@ else
     //to refresh page after deleting member
     public void RefreshPage(int Id)
     {
-        //memberList = memberService.GetAll();
+        //refresh pahe after delete - get all members from db
+        memberList = memberService.GetAll();
+        StateHasChanged();
 
-        memberList.RemoveAll(x => x.Id == Id);
-
-        //navigationManager.NavigateTo("./memberlist", true);
+        //refresh page without getting all members from db
+        //memberList.RemoveAll(x => x.Id == Id);
         //StateHasChanged();
     }
 

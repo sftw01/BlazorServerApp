@@ -9,14 +9,19 @@
                 <td>@Member.JoiningDate</td>
                 <td>
                     <button @onclick="Delete" class="btn btn-danger">Delete</button>
+                    <button @onclick="Edit" class="btn btn-info">Edit</button>
                 </td>
 
+                <ModalAddContact @ref="modalAddContact" member="_member"></ModalAddContact>
 
 @code {
+
 
     [Parameter]
     public Member Member { get; set; }
     //
+    public Member _member = new Member();
+
     [Parameter]
     public EventCallback<int> DeleteMember { get; set; }
 
@@ -26,6 +31,22 @@
         DeleteMember.InvokeAsync(Member.Id);
     }
 
-   
+    public ModalAddContact modalAddContact = new ModalAddContact();
+
+    private void Edit()
+    {
+        modalAddContact.member.MemberName = Member.MemberName;
+        modalAddContact.member.Email = Member.Email;
+        modalAddContact.member.Age = Member.Age;
+        modalAddContact.Show();
+
+    }
+
+    protected override void OnInitialized()
+    {
+        _member = Member;
+
+        base.OnInitialized();
+    }
 
 }
