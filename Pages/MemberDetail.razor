@@ -1,14 +1,31 @@
-﻿
+﻿@using BlazorServerApp.Services;    
+@inject IMemberService memberService;
+
+
                 <th scope="row">@Member.Id</th>
                 <td>@Member.MemberName</td>
                 <td>@Member.Email</td>
                 <td>@Member.Age</td>
                 <td>@Member.JoiningDate</td>
+                <td>
+                    <button @onclick="Delete" class="btn btn-danger">Delete</button>
+                </td>
 
 
 @code {
 
     [Parameter]
     public Member Member { get; set; }
+    //
+    [Parameter]
+    public EventCallback<int> DeleteMember { get; set; }
+
+    private void Delete()
+    {
+        memberService.Delete(Member.Id);
+        DeleteMember.InvokeAsync(Member.Id);
+    }
+
+   
 
 }

@@ -62,7 +62,7 @@ namespace BlazorServerApp
             }
 
             //seed random members to the database
-            seedMembers.Seed(10);
+            seedMembers.Seed(5);
 
             // Seed the database with some contacts
             ContactListSeeder seederContactList = new ContactListSeeder(app.ApplicationServices.GetService<IContactService>());
