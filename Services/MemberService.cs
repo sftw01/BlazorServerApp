@@ -89,5 +89,23 @@ namespace BlazorServerApp.Services
             Create(member);
         }
 
+
+        public void UpdateMember(Member member)
+        {
+            var memberToUpdate = _membersDbContext
+                .Members
+                .FirstOrDefault(m => m.Id == member.Id);
+
+            if(memberToUpdate is null)
+            {
+                throw new System.Exception("Member not found by id, can not update");
+            }
+
+            memberToUpdate.Age = member.Age;
+            memberToUpdate.MemberName = member.MemberName;
+            memberToUpdate.Email = member.Email;
+
+            _membersDbContext.SaveChanges();
+        }
     }
 }

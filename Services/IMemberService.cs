@@ -19,6 +19,8 @@ namespace BlazorServerApp.Services
 
         //to wrap
         void AddMember(Member member);
+        void UpdateMember(Member member);
+
 
     }
 }

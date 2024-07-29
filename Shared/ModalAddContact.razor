@@ -23,13 +23,13 @@
                         <DataAnnotationsValidator> </DataAnnotationsValidator>
 
                         <ValidationMessage For="@(() => _tempMember.MemberName)"></ValidationMessage>
-                        <InputText class="form-control" placeholder="Name" @bind-Value="@_tempMember.MemberName"></InputText><br />
+                        <InputText class="form-control" placeholder="@member.MemberName" @bind-Value="@_tempMember.MemberName"></InputText><br />
 
                         <ValidationMessage For="@(() => _tempMember.Email)"></ValidationMessage>
-                        <InputText class="form-control" placeholder="Email" @bind-Value="@_tempMember.Email"></InputText><br />
+                        <InputText class="form-control" placeholder="@member.Email" @bind-Value="@_tempMember.Email"></InputText><br />
 
-                        <InputNumber class="form-control" placeholder="Age" @bind-Value="@_tempMember.Age"></InputNumber><br />
-                        <InputDate class="form-control" placeholder="Joining date" @bind-Value="_tempMember.JoiningDate"></InputDate><br />
+                        <InputNumber class="form-control" placeholder="@member.Email" @bind-Value="@_tempMember.Age"></InputNumber><br />
+                        <InputDate class="form-control" placeholder="@member.JoiningDate" @bind-Value="_tempMember.JoiningDate"></InputDate><br />
 
                         @* <button class="btn btn-primary" type="submit">Save Member</button> *@
 
@@ -52,13 +52,9 @@
 
 
 @code {
-    //get members details from db
-    private List<Member> memberList;
 
     [Parameter]
     public Member member {get ; set;}
-    //public Member _member = new Member();
-
 
     [Parameter]
     public EventCallback<bool> UserChoice { get; set; }
@@ -83,6 +79,10 @@
             member.Email = _tempMember.Email;
             member.MemberName = _tempMember.MemberName;
             member.Age = _tempMember.Age;
+
+            memberService.UpdateMember(member);
+
+            NavigationManager.NavigateTo("/memberlist", true);
         }
         showBox = false;
         await UserChoice.InvokeAsync(value);
@@ -90,11 +90,13 @@
 
     protected override void OnInitialized()
     {
-        _tempMember.MemberName = member.MemberName;
-        _tempMember.Email = member.Email;
-        _tempMember.Age = member.Age;   
-
+        ResetForm();
         base.OnInitialized();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
     }
 
     private void ResetForm()
