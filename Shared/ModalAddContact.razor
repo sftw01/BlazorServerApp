@@ -1,7 +1,7 @@
 ﻿@using BlazorServerApp.Services;
 
 @inject NavigationManager NavigationManager;
-@inject IMemberService memberService;   
+@inject IMemberService memberService;
 
 @if (showBox)
 {
@@ -37,12 +37,12 @@
 
 
                 </div>
-                <div class="modal-footer">
-                    @* <button type="button" @onclick="() => OnChoiceChange(false)" class="btn btn-secondary" data-bs-dissmiss="modal">Close</button> *@
-
+                <div class="modal-footer d-flex justify-content-between">
                     <button @onclick="ResetForm" class="btn btn-outline-warning">Clear</button>
-                    <button @onclick="() => OnChoiceChange(false)" class="btn btn-outline-secondary">Abort</button> 
-                    <button @onclick="() => OnChoiceChange(true)" class="btn btn-success">Confirm</button>
+                    <div>
+                        <button @onclick="() => OnChoiceChange(false)" class="btn btn-outline-secondary">Abort</button>
+                        <button @onclick="() => OnChoiceChange(true)" class="btn btn-success">Confirm</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
 @code {
 
     [Parameter]
-    public Member member {get ; set;} = new Member();
+    public Member member { get; set; } = new Member();
 
     [Parameter]
     public EventCallback<bool> UserChoice { get; set; }
@@ -74,7 +74,7 @@
 
     protected async Task OnChoiceChange(bool value)
     {
-        if(value)
+        if (value)
         {
             member.Email = _tempMember.Email;
             member.MemberName = _tempMember.MemberName;

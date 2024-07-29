@@ -13,6 +13,8 @@
 <button @onclick="DeleteAll" type="button" class="btn btn-danger">Delete All</button>
 <button @onclick="MemberSeed" type="button" class="btn btn-secondary">Member seed</button>
 <input @bind="@MemberCount" />
+<br />
+<br />
 
 
 @if (memberList.Count == 0 || memberList == null)
@@ -36,6 +38,7 @@ else
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Age</th>
@@ -45,8 +48,9 @@ else
         </thead>
         @foreach (var member in memberList)
         {
+            MemberCount++;
             <tr>
-                <MemberDetail Member="@member" DeleteMember="RefreshPage"></MemberDetail>
+                <MemberDetail IdCount="@MemberCount" Member="@member" DeleteMember="RefreshPage"></MemberDetail>
             </tr>
         }
     </table>
@@ -57,7 +61,7 @@ else
 
 
 @code {
-    public int MemberCount=1;
+    public int MemberCount;
     private List<Member> memberList;
 
 

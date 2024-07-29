@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorServerApp.Seeder;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using BlazorBootstrap;
+using BlazorServerApp.Services;
 
 namespace BlazorServerApp
 {
@@ -31,7 +33,7 @@ namespace BlazorServerApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddBlazorBootstrap();
-
+            //services.AddSingleton<ToastsService<ToastMessage>>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();

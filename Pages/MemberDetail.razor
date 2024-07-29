@@ -4,7 +4,8 @@
 @inject IMemberService memberService;
 
 
-<th scope="row">@Member.Id</th>
+<th scope="row">@IdCount</th>
+<td>@Member.Id</td>
 <td>@Member.MemberName</td>
 <td>@Member.Email</td>
 <td>@Member.Age</td>
@@ -19,7 +20,8 @@
 
 
 @code {
-
+    [Parameter]
+    public int IdCount { get; set; }            //for show next numeer in table
 
     [Parameter]
     public Member Member { get; set; }
