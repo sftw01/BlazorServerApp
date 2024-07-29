@@ -54,7 +54,7 @@
 @code {
 
     [Parameter]
-    public Member member {get ; set;}
+    public Member member {get ; set;} = new Member();
 
     [Parameter]
     public EventCallback<bool> UserChoice { get; set; }
