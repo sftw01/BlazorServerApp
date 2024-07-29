@@ -11,34 +11,13 @@
     @if (Contacts is null)
     {
         @NullContacts
-
-
-        @*     <br />
-    <span>Contacts are loading...</span>
-    <br /> *@
-
-        @*     <div class="alert alert-info" role="alert">
-        Contacts are loading...
-    </div> *@
     }
     else if (Contacts.Count == 0)
     {
         @EmptyContacts
-
-
-
-        @*     <br />
-    <span>No contacts to display...</span>
-    <br /> *@
-
-        @*     <div class="alert alert-warning" role="alert">
-        No contacts to display...
-    </div> *@
     }
     else
     {
-        @* without binding data, pass a parameter *@
-        @* <input type="checkbox" @onchange="@( () => DisplayEmail = !DisplayEmail )" /><label>Display email</label> *@
 
         @* binding data Display Email with checkbox state *@
         <input type="checkbox" @bind="DisplayEmail" />

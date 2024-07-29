@@ -16,6 +16,9 @@ namespace BlazorServerApp.Pages
         [Inject]
         NavigationManager navigationManager { get; set; }
 
+        [CascadingParameter]
+        public Theme AppTheme { get; set; }
+
 
         private List<Contact> contacts;
         private bool IsContactDisplayed = true;
@@ -29,7 +32,7 @@ namespace BlazorServerApp.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            await Task.Delay(2000);
+            await Task.Delay(1000);
 
             contacts = contactService.GetContacts();
 

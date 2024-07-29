@@ -1,7 +1,7 @@
 ﻿@page "/"
 @page "/Index"
 
-<h1>Contact list: </h1>
+<h1 style="color:@AppTheme.PrimaryColor">Contact list: </h1>
 <br />
 
 @using BlazorServerApp.Shared;
@@ -14,7 +14,6 @@
 <ContactList @ref="contactList" Contacts="contacts">
     <NullContacts>
         <div class="alert alert-info" role="alert">
-            @* <span>Contacts are loading... (from Index Razor)</span> *@
             <div class="d-flex align-items-center">
                 <strong role="status">Contacts are loading... (from Index Razor)</strong>
                 <div class="spinner-border ms-auto" aria-hidden="true"></div>

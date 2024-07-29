@@ -2,9 +2,9 @@
 
 @using BlazorServerApp.Pages.ContactComponents;
 
-<h1>Counter</h1>
+<h1 style="color:@AppTheme.PrimaryColor">Counter</h1>
 
-<p>Current count: @currentCount</p>
+<p style="color:@AppTheme.SecondaryColor">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
@@ -12,6 +12,10 @@
 <input @bind="@currentCount" />
 
 @code {
+
+    [CascadingParameter]
+    public Theme AppTheme { get; set; }
+
     private int currentCount = 0;
 
     private void IncrementCount()

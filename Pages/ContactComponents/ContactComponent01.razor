@@ -2,7 +2,8 @@
 
 
 <p>
-    <b>Name: </b><span>@CurrentContact.FirstName  @CurrentContact.LastName</span><br />
+    @* <b>Name: </b><span style="color: @ContactColor">@CurrentContact.FirstName  @CurrentContact.LastName</span><br /> *@
+    <b>Name: </b><span style="color:@AppTheme.SecondaryColor" >@CurrentContact.FirstName  @CurrentContact.LastName</span><br />
     @if (DisplayEmail)
     {
         <b>Email: <i>@CurrentContact.Email</i></b> <br />
@@ -13,14 +14,31 @@
         <span>The Email Address of @CurrentContact.FirstName @CurrentContact.LastName is @CurrentContact.Email</span>
     }
     <br />
+    @*     Cascading INT Value: @TestCascadingValue
+    Cascading Test Value: @TestColor *@
+    <br />
+
+
 
     <button @onclick="@( () => { displayInfo = !displayInfo; } )">Show more info</button>
 
-    <button @onclick="@( () => DeleteCurrentContact.InvokeAsync(CurrentContact) )">Delete</button>
+    <button @onclick="@( () => DeleteCurrentContact.InvokeAsync( CurrentContact ) )">Delete</button>
+    <button @onclick="@( () => DeleteCurrentContact.InvokeAsync( CurrentContact ) )">Delete</button>
 
 </p>
 
 @code {
+    // [CascadingParameter(Name = "Color")]
+    // public string ContactColor { get; set; }
+    // [CascadingParameter]
+    // public string TestCascadingValue { get; set; }
+    // [CascadingParameter(Name = "TestColor")]
+    // public string TestColor { get; set; }
+
+    [CascadingParameter]
+    public Theme AppTheme { get; set; }
+
+
     [Parameter]
     public Contact CurrentContact { get; set; }
 
