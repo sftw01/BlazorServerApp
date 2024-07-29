@@ -1,21 +1,22 @@
 ﻿@using BlazorServerApp.Shared;
 
-@using BlazorServerApp.Services;    
+@using BlazorServerApp.Services;
 @inject IMemberService memberService;
 
 
-                <th scope="row">@Member.Id</th>
-                <td>@Member.MemberName</td>
-                <td>@Member.Email</td>
-                <td>@Member.Age</td>
-                <td>@Member.JoiningDate</td>
-                <td>
-                    <button @onclick="Delete" class="btn btn-danger">Delete</button>
-                    <button @onclick="Edit" class="btn btn-info">Edit</button>
-                </td>
+<th scope="row">@Member.Id</th>
+<td>@Member.MemberName</td>
+<td>@Member.Email</td>
+<td>@Member.Age</td>
+<td>@Member.JoiningDate</td>
+<td>
+    <button @onclick="DeletePermision" class="btn btn-danger">Delete</button>
+    <button @onclick="Edit" class="btn btn-info">Edit</button>
+</td>
 
-                <ModalAddContact @ref="modalAddContact" member="_member"></ModalAddContact>
-       
+<ModalAddContact @ref="modalAddContact" member="_member"></ModalAddContact>
+<ModalDeleteMember @ref="modalDeleteMember" OnConfirmed="DeleteExecute"></ModalDeleteMember>
+
 
 @code {
 
@@ -26,12 +27,27 @@
     public Member _member = new Member();
 
     [Parameter]
-    public EventCallback<int> DeleteMember { get; set; }   
-   
-    private void Delete()
-    {
+    public EventCallback<int> DeleteMember { get; set; }
 
-        memberService.Delete(Member.Id);
+    //pass parameter to ModalDeleteMember
+    ModalDeleteMember modalDeleteMember = new ModalDeleteMember();
+
+
+    private void DeletePermision()
+    {
+        modalDeleteMember.Show();
+        modalDeleteMember.MemberToDelete = Member;
+        //memberService.Delete(Member.Id);
+
+        //DeleteMember.InvokeAsync(Member.Id);
+    }
+
+    private void DeleteExecute(Member member)
+    {
+        if (member != null)
+        {
+            memberService.Delete(member.Id);
+        }
         DeleteMember.InvokeAsync(Member.Id);
     }
 

@@ -1,0 +1,62 @@
+﻿@page "/aaa"
+
+@if (showPopup)
+{
+    <div class="modal-backdrop show"></div>
+    <div class="modal fade show" style="display:block" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm delete</h5>
+                    <button type="button" @onclick="ClosePopup" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @* <button type="button" class="btn-sm" data-bs-dissmiss="modal" aria-label="Close"></button> *@
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to remove
+                       @MemberToDelete.MemberName from the lists?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" @onclick="ClosePopup" class="btn btn-secondary" data-bs-dissmiss="modal">Close</button>
+                    <button type="button" @onclick="Confirm" class="btn btn-danger">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@code {
+
+    private bool showPopup = false;
+    public Member MemberToDelete { get; set; }
+    public string BodyContent { get; set; }
+
+    [Parameter]
+    public EventCallback<Member> OnConfirmed { get; set; }
+
+
+    public void Show() => showPopup = true;
+    public void Hide() => showPopup = false;
+
+    private void ClosePopup()
+    {
+        Hide();
+    }
+
+    private async Task Confirm()
+    {
+        if (MemberToDelete is null)
+        {
+            await OnConfirmed.InvokeAsync(null);
+        }
+
+        await OnConfirmed.InvokeAsync(MemberToDelete);
+
+        ClosePopup();
+    }
+}
