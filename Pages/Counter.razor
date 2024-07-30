@@ -1,4 +1,6 @@
 ﻿@page "/counter"
+@using System.Timers;
+@implements IDisposable;
 
 @using BlazorServerApp.Pages.ContactComponents;
 
@@ -20,8 +22,12 @@
 <select @bind="AppTheme.SecondaryColor">
     <option value="red">Red</option>
     <option value="blue">Blue</option>
-    <option value="green">Green</option
+    <option value="green">Green</option>
 </select>
+<br />
+
+<span style="color:red; font-weight:700">@dateTimeValue</span>
+
 <br />
 
 <input @bind="@currentCount" />
@@ -31,7 +37,33 @@
     [CascadingParameter]
     public Theme AppTheme { get; set; }
 
+    private Timer timer;
+    private string dateTimeValue;
+
     private int currentCount = 0;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        timer = new Timer();
+        timer.Interval = 1000;
+        timer.Elapsed += OnTimerElapsed;
+        timer.Enabled = true;
+    }
+
+    public void Dispose()
+    {
+        timer.Dispose();
+    }
+
+    private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        dateTimeValue = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+        
+        //InvokeAsync(() => StateHasChanged());
+        InvokeAsync(StateHasChanged);
+    }
 
     private void IncrementCount()
     {
