@@ -7,8 +7,23 @@
 <p style="color:@AppTheme.SecondaryColor">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
 <br />
+
+<span Primary color:></span>
+<select @bind="AppTheme.PrimaryColor">
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+    <option value="green">Green</option
+</select>
+<br
+<span Primary color:></span>
+<select @bind="AppTheme.SecondaryColor">
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+    <option value="green">Green</option
+</select>
+<br />
+
 <input @bind="@currentCount" />
 
 @code {
